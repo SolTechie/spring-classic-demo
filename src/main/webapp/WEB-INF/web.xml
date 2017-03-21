@@ -1,0 +1,25 @@
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0"
+         metadata-complete="true">
+
+    <display-name>spring_classic_mvc</display-name>
+    <servlet>
+        <servlet-name>dispatcher_worker</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <!--classpath指代/WEB-INF/classes/这个位置;classpath*不仅包含class路径,还包括jar文件中(class路径)进行查找-->
+            <!--这里可以用逗号隔开，也可以设置通配符-->
+            <!--<param-value>classpath:spring-anno-web.xml</param-value>-->
+            <!--<param-value>classpath:spring-xml-*.xml</param-value>-->
+            <param-value>classpath:spring-xml-web.xml</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcher_worker</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+</web-app>

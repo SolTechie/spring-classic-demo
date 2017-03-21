@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    <!--相应的schema可以在http://www.springframework.org/schema中找到-->
+
+    <!--扫描指定包内带注解的bean，注入容器-->
+    <context:component-scan base-package="demo.web"/>
+
+    <!--返回值有@ResponseBody注解，项目包含jackson的包，就可以把返回对象转换为json-->
+    <!--转换为json，这里也要配置-->
+    <bean id="jsonMapping" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="jsonMapping"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 配置jsp 显示ViewResolver -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+</beans>
+
